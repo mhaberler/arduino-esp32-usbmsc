@@ -29,17 +29,20 @@ $ pio run --target clean
 
 
 # Commands to use in this project
+1. Make the data folder into a data.bin file in PlatformIO Core CLI. The size is 0xFF000 for 0x111000. 
 
-# Make the data folder into a data.bin file in PlatformIO Core CLI. The size is 0xFF000 for 0x111000. 
-c:\Users\ringo\.platformio\packages\tool-mkfatfs\mkfatfs.exe -c data -t fatfs -s 1044480 .pio\build\esp32-s3-devkitc-1\data.bin  
+```
 c:\Users\(name)\.platformio\packages\tool-mkfatfs\mkfatfs.exe -c data -t fatfs -s 1044480 .pio\build\(board)\data.bin  
+```
 
-# Upload data.bin to ringo partition (must write to 0x111000) in PlatformIO Core CLI
-python "c:\Users\ringo\.platformio\packages\tool-esptoolpy\esptool.py" --chip esp32s3 --port COM77 --baud 460800 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_size 8MB 0x111000 .pio\build\esp32-s3-devkitc-1\data.bin
+2. Upload data.bin to ringo partition (must write to 0x111000) in PlatformIO Core CLI
+```
 python "c:\Users\(name)\.platformio\packages\tool-esptoolpy\esptool.py" --chip esp32s3 --port (COMPORT) --baud 460800 --before default_reset --after hard_reset write_flash -z --flash_mode dio --flash_size 8MB 0x111000 .pio\build\(board)\data.bin
+```
 
 # Set usb_msc_mode variable to USB_MSC_NONE.
-# See the log.
+See the log.
+```
 [    99][D][esp32-hal-tinyusb.c:680] tinyusb_enable_interface(): Interface CDC enabled
 [    99][D][esp32-hal-tinyusb.c:680] tiTotal space:    1019904
 Free space:    1015808
@@ -70,10 +73,11 @@ high
 low
 high
 low
-
+```
 
 # Set usb_msc_mode variable to USB_MSC_FAT.
-# See the log.
+See the log.
+```
 [    99][D][esp32-hal-tinyusb.c:680] tinyusb_enable_interface(): Interface CDC enabled
 [    99][D][esp32-hal-tinyusb.c:680] timsc_strage_init OK
 wl_handle OK size 1024000 sector_size 4096
@@ -87,3 +91,4 @@ high
 low
 high
 low
+```
