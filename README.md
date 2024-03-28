@@ -1,3 +1,9 @@
+Arduino esp32 is based on esp-idf 4.4. And although the partition created with mkfatfs in Arduino starts at position offset 0, the esp_vfs_fat_spiflash_mount function used by FFat's begin normally recognizes images starting at offset 0x1000. This can be confirmed by looking at the log downloading the fatfs image from Arduino IDE.
+Therefore, if the fat partition starts at 0x110000 and has a size of 0x10000, the fat image applied to it must start at 0x111000 and be created with a size of 0xFF000 to be used normally.
+
+The msc_xxx series functions in the source were imported from tusb_msc_storage.c in esp-idf 5.1. esp-idf has increased USB support examples since 5.1.
+
+
 How to build PlatformIO based project
 =====================================
 
