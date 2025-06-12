@@ -17,13 +17,13 @@ void loop() {}
 #include "USB.h"
 #include "USBMSC.h"
 
-#if ARDUINO_USB_CDC_ON_BOOT
-#define HWSerial Serial0
-#define USBSerial Serial
-#else
-#define HWSerial Serial
-USBCDC CDC;
-#endif
+// #if ARDUINO_USB_CDC_ON_BOOT
+// #define HWSerial Serial0
+// #define USBSerial Serial
+// #else
+// #define HWSerial Serial
+// USBCDC CDC;
+// #endif
 
 USBMSC MSC;
 
@@ -371,8 +371,10 @@ void testFat(void)
 
 void setup()
 {
+    delay(3000);
     Serial.begin(115200);
-    Serial.setDebugOutput(true);
+    // Serial.setDebugOutput(true);
+    log_e("boot");
 
     if (usb_msc_mode == USB_MSC_NONE)
     {
@@ -411,13 +413,13 @@ void setup()
         MSC.onWrite(onWrite);
         MSC.mediaPresent(true);
         MSC.begin(s / ss, ss);
-        CDC.begin();
-        USB.begin();
+        // CDC.begin();
+        // USB.begin();
     }
 
 
     // initialize LED digital pin as an output.
-    pinMode(LED_BUILTIN, OUTPUT);
+    // pinMode(LED_BUILTIN, OUTPUT);
 }
 
 void loop()
@@ -425,12 +427,12 @@ void loop()
     // put your main code here, to run repeatedly:
 
     // turn the LED on (HIGH is the voltage level)
-    digitalWrite(LED_BUILTIN, HIGH);
+    // digitalWrite(LED_BUILTIN, HIGH);
     // Serial.printf("high\n");
     // wait for a second
     delay(1000);
     // turn the LED off by making the voltage LOW
-    digitalWrite(LED_BUILTIN, LOW);
+    // digitalWrite(LED_BUILTIN, LOW);
     Serial.printf("low\n");
     // wait for a second
     delay(1000);
