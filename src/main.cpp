@@ -371,7 +371,7 @@ void testFat(void)
 
 void setup()
 {
-    delay(3000);
+    delay(5000);
     Serial.begin(115200);
     // Serial.setDebugOutput(true);
     log_e("boot");
